@@ -12,12 +12,13 @@ import { SideBlock } from "./SideBlock";
 
 export const TagsBlock = ({ items, isLoading = true }) => {
   return (
-    <SideBlock title="Тэги">
+    <SideBlock title="Tags">
       <List>
         {(isLoading ? [...Array(5)] : items).map((name, i) => (
           <a
             style={{ textDecoration: "none", color: "black" }}
             href={`/tags/${name}`}
+            key={i}
           >
             <ListItem key={i} disablePadding>
               <ListItemButton>
