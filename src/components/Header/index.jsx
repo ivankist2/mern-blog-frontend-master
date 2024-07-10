@@ -8,7 +8,7 @@ import Container from '@mui/material/Container';
 export const Header = () => {
   const isAuth = false;
 
-  const onClickLogout = () => {};
+  const onClickLogout = () => { };
 
   return (
     <div className={styles.root}>
@@ -21,19 +21,19 @@ export const Header = () => {
             {isAuth ? (
               <>
                 <Link to="/posts/create">
-                  <Button variant="contained">Написать статью</Button>
+                  <Button variant="contained">Create a post</Button>
                 </Link>
                 <Button onClick={onClickLogout} variant="contained" color="error">
-                  Выйти
+                  Logout
                 </Button>
               </>
             ) : (
               <>
                 <Link to="/login">
-                  <Button variant="outlined">Войти</Button>
+                  <Button variant="outlined">Login</Button>
                 </Link>
                 <Link to="/register">
-                  <Button variant="contained">Создать аккаунт</Button>
+                  <Button variant="contained">Register</Button>
                 </Link>
               </>
             )}

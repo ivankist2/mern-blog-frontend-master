@@ -4,11 +4,14 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import { useForm } from 'react-hook-form';
+import { useDispatch } from "react-redux";
 
 import styles from "./Login.module.scss";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import { fetchAuth } from "../../redux/slices/auth";
 
 export const Login = () => {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -16,20 +19,21 @@ export const Login = () => {
     formState: { errors, isValid }
   } = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'Password@gmail.com',
+      password: 'Password',
     },
-    mode: 'onChange'
+    mode: 'onChange',
+    // mode: 'all',
   });
 
   const onSubmit = (values) => {
-    console.log(values);
+    dispatch(fetchAuth(values));
   };
 
   return (
     <Paper classes={{ root: styles.root }}>
       <Typography classes={{ root: styles.title }} variant="h5">
-        Вход в аккаунт
+        Login
       </Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
@@ -37,19 +41,20 @@ export const Login = () => {
           label="E-Mail"
           error={Boolean(errors.email?.message)}
           helperText={errors.email?.message}
+          type="email"
           {...register('email', { required: 'Enter email' })}
           fullWidth
         />
         <TextField
           className={styles.field}
-          label="Пароль"
+          label="Password"
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
           {...register('password', { required: 'Enter password' })}
           fullWidth
         />
         <Button type="submit" size="large" variant="contained" fullWidth>
-          Войти
+          Login
         </Button>
       </form>
     </Paper>
