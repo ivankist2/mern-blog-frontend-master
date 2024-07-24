@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectIsAuth } from '../../redux/slices/auth';
+import { getMe, logout, selectIsAuth } from '../../redux/slices/auth';
 import styles from './Header.module.scss';
 
 export const Header = () => {
   const isAuth = useSelector(selectIsAuth);
+  const me = useSelector(getMe);
   const dispatch = useDispatch();
 
   const onClickLogout = () => {
@@ -25,10 +26,13 @@ export const Header = () => {
           <Link className={styles.logo} to="/">
             <div>ARCHAKOV BLOG</div>
           </Link>
+          <div>
+            {me?.fullName}
+          </div>
           <div className={styles.buttons}>
             {isAuth ? (
               <>
-                <Link to="/posts/create">
+                <Link to="/add-post">
                   <Button variant="contained">Create a post</Button>
                 </Link>
                 <Button onClick={onClickLogout} variant="contained" color="error">
